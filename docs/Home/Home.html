@@ -4,17 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CoffeandBlue</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Home.css" />
-  <link rel="manifest" href="../manifest.webmanifest">
-<link rel="apple-touch-icon" href="../icon-192.png">
-<meta name="theme-color" content="#0f172a">
-</head>
-<script src="sw-register.js" defer></script>
 
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../Acerca/acerca.css" />
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <meta name="theme-color" content="#0f172a">
+</head>
 <body>
+
   <!-- Header -->
   <header class="site-header" id="header">
     <div class="container nav">
@@ -30,97 +28,101 @@
 
       <nav class="nav-menu" id="navMenu" aria-label="Principal">
         <ul>
+          <li><a href="../Home/Home.html">Inicio</a></li>
           <li><a href="../Productos/productos.html">Productos</a></li>
-          <li><a href="../Acerca/acerca.html">Acerca de</a></li>
-          <li class="has-dropdown">
-            <button class="link-like" aria-haspopup="true" aria-expanded="false">Opciones ▾</button>
-            <ul class="dropdown" role="menu">
-              <li><a href="../Login/Login.html" role="menuitem">Iniciar Sesion</a></li>
-              <li><a href="#" role="menuitem">Contactanos</a></li>
-              <li><a href="#" role="menuitem">Ubicaciones</a></li>
-            </ul>
-          </li>
+          <li><a class="active" href="../Acerca/acerca.html">Acerca de</a></li>
         </ul>
       </nav>
 
       <div class="nav-cta">
-        <a class="link" href="../Login/Login.html">Cerrar Sesión</a>
-        <a class="btn btn-light" href="../Login/Login.html">Iniciar sesión</a>
+        <a class="link" href=""></a>
+        <a class="btn btn-light" href="../Home/Home.html">Inicio</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <h1 class="hero-title">
-          Coffee <em>and</em> Blue
-        </h1>
-        <p class="hero-sub">
-            ¿Quieres disfrutar de un nuevo sabor de café y vivir una experiencia única?
-        </p>
-        <p class="hero-sub">
-            No necesitas tarjeta de crédito ni hacer pagos elevados.
-        </p>
-        <p class="hero-sub">
-            La calidad es lo que nos define.
-        </p>
-      </div>
+  <!-- Contenido Acerca de -->
+  <main class="container about">
+    <section class="about-hero">
+      <h1>Acerca de <span>Café Aroma</span></h1>
+      <p>Queremos que cada sorbo sea un momento especial, lleno de aroma, sabor y calidad.</p>
+    </section>
 
-      <!-- “Tablet” con el clima -->
-      <div class="hero-art">
-        <div class="device">
-          <div class="device-screen">
-            <article class="card">
-              <header class="card-head">
-                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                <h3>Clima con tiempo real</h3>
-                <nav class="mini-nav">
-                  <a href="#" id="refreshWeather">Refrescar</a>
-                </nav>
-              </header>
+    <section class="about-grid">
+      <article class="card">
+        <h2>Misión</h2>
+        <p>
+          Ofrecer café de la más alta calidad, cultivado de forma sostenible, para brindar a nuestros clientes una experiencia única en cada taza.
+        </p>
+      </article>
 
-              <!-- WEATHER WIDGET -->
-              <div class="card-media weather" id="weatherBox">
-                <div class="weather-top">
-                  <div class="weather-icon" id="weatherIcon" aria-hidden="true"></div>
-                  <div class="weather-temp">
-                    <span id="weatherTemp">--</span><small>°C</small>
-                  </div>
-                </div>
-                <div class="weather-meta">
-                  <span id="weatherCity">Ubicación</span> ·
-                  <span id="weatherDesc">Cargando…</span>
-                </div>
-              </div>
+      <article class="card">
+        <h2>Visión</h2>
+        <p>
+          Ser reconocidos como la cafetería de referencia para los amantes del café, destacando por nuestro sabor, innovación y compromiso con los productores locales.
+        </p>
+      </article>
 
-            </article>
+      <article class="card">
+        <h2>Contacto</h2>
+        <ul class="contact">
+          <li><strong>Teléfono:</strong> <a href="tel:+526562721871">+52 656 272 1871</a></li>
+          <li><strong>Correo:</strong> <a href="mailto:EdRe@coffeandblue.mx">EdRe@coffeandblue.mx</a></li>
+          <li><strong>Dirección:</strong> Gran Patio, Ciudad Juárez, MX</li>
+          <li><strong>Horario:</strong> L–D 7:00–21:00</li>
+        </ul>
+      </article>
+
+      <article class="card card-map">
+        <h2>Estamos aquí</h2>
+        <div id="map" class="map" aria-label="Mapa con ubicación" style="height:400px;"></div>
+        <p class="map-note" id="mapNote">Ubicación fija: Gran Patio Ciudad Juárez.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Script: Mapa SIEMPRE fijo en Gran Patio Ciudad Juárez -->
+  <script>
+    // Coordenadas del centro comercial (ajústalas si quieres más precisión)
+    const granPatioCoords = { lat: 31.6904, lng: -106.4245 };
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: granPatioCoords,
+        mapTypeId: "roadmap",
+      });
+
+      const marker = new google.maps.Marker({
+        position: granPatioCoords,
+        map,
+        title: "Gran Patio Ciudad Juárez",
+      });
+
+      const info = new google.maps.InfoWindow({
+        content: `
+          <div style="font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial; line-height:1.3">
+            <strong>Gran Patio Ciudad Juárez</strong><br>
+            <a href="tel:+526562721871">+52 656 272 1871</a><br>
+            <small>Ubicación fija</small>
           </div>
-        </div>
+        `
+      });
 
-        <!-- Props decorativos -->
-        <div class="props">
-          <span class="prop cyl"></span>
-          <span class="prop ring"></span>
-          <span class="prop dumbbell"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js")
-        .then(reg => console.log("SW registrado:", reg.scope))
-        .catch(err => console.error("Fallo SW:", err));
-    });
-  }
-</script>
+      marker.addListener("click", () => info.open({ anchor: marker, map }));
 
-  <script src="Home.JS"></script>
-  <script src="sw-register.js" defer></script>
+      // Abre el InfoWindow por defecto
+      info.open({ anchor: marker, map });
 
-  
+      // Mensaje bajo el mapa
+      const note = document.getElementById("mapNote");
+      if (note) note.textContent = "Ubicación fija: Gran Patio Ciudad Juárez.";
+    }
+  </script>
+
+  <!-- Carga de Google Maps (usa tu misma API key) -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9T093qUAX2Ih7dURB3krlpw98i4Ufe0M&callback=initMap">
+  </script>
 </body>
 </html>

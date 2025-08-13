@@ -1,6 +1,7 @@
 // ====== WEATHER WIDGET (OpenWeatherMap) ======
 const OWM_KEY = "e3ac3f2829e07b7948d7096747ddc9e3";          // <-- pon aquí tu API key de OpenWeatherMap
 const DEFAULT_CITY = "Chihuahua, MX";            // fallback si falla la geolocalización
+const FORCE_CITY = "Ciudad Juarez, MX"; // si quieres forzar una ciudad específica, descomenta esta línea y comenta la anterior
 const API = "https://api.openweathermap.org/data/2.5/weather";
 const WEATHER_CLASSES = ["clear","clouds","rain","thunder","snow","mist"];
 
@@ -91,37 +92,16 @@ async function loadWeather() {
     W.desc.textContent = "Cargando…";
     W.icon.innerHTML = "";
 
-    // 1) GPS si se puede
-    let usedCityLabel = null;
-    let data = null;
+    // SIEMPRE traer por ciudad fija (ignora geolocalización)
+    const data = await getWeatherByCity(FORCE_CITY);
 
-    const pos = await new Promise((resolve, reject) => {
-      if (!navigator.geolocation) return reject(new Error("no-geo"));
-      navigator.geolocation.getCurrentPosition(
-        p => resolve(p),
-        () => reject(new Error("geo-denied")),
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    }).catch(() => null);
-
-    if (pos) {
-      const { latitude, longitude } = pos.coords;
-      data = await getWeatherByCoords(latitude, longitude);
-      // si prefieres mostrar “Tu ubicación”, usa esto:
-      // usedCityLabel = "Tu ubicación";
-    } else {
-      // 2) Fallback por ciudad
-      data = await getWeatherByCity(DEFAULT_CITY);
-      usedCityLabel = DEFAULT_CITY;
-    }
-
-    renderWeather(data, usedCityLabel);
+    // Mostrar el nombre fijo tal cual
+    renderWeather(data, FORCE_CITY);
   } catch (e) {
     console.error("Weather error:", e);
     W.desc.textContent = "No se pudo cargar el clima";
   }
 }
-
 // Botón “Refrescar”
 W.refresh?.addEventListener("click", (ev) => {
   ev.preventDefault();
