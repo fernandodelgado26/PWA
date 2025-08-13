@@ -1,13 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=Login/Login.html">
-  <title>Redirigiendo...</title>
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Redirigiendo…</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0f172a">
 <body>
-
-  <p>Redirigiendo al login...</p>
-  
+  <p>Redirigiendo al login…</p>
+  <script src="sw-register.js"></script>
+  <script>
+    // espera un momento (o a que SW quede activo) y redirige
+    setTimeout(() => { location.href = "Login/Login.html"; }, 200);
+  </script>
 </body>
 </html>

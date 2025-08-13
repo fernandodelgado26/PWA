@@ -1,67 +1,62 @@
-// sw.js
-const CACHE_NAME = "app-v1";
+const CACHE = "app-v1";
 
-// Archivos que quieres disponibles offline (ajusta rutas reales)
 const PRECACHE_URLS = [
-  "/",               // si tu servidor resuelve / a /index.html
-  "/index.html",
-  "/Home/Home.html",
-  "/Home/Home.css",
-  "/Home/Home.js",   // si renombraste
-  "/Login/Login.html",
-  "/Login/Login.css",
-  "/Login/Login.js",
-  "/Productos/productos.html",
-  "/Productos/producto.css",
-  "/Productos/producto.js",
-  "/Acerca/acerca.html",
-  "/Acerca/acerca.css",
-  "/Acerca/acerca.js",
-  "/firebase-config.js",
-  "/icon-192.png",
-  "/icon-512.png",
-  "/maskable-512.png"
+  "./",
+  "index.html",
+  "manifest.webmanifest",
+  "sw-register.js",
+  "firebase-config.js",
+  "icon-192.png",
+  "icon-512.png",
+  "maskable-512.png",
+
+  "Home/Home.html",
+  "Home/Home.css",
+  "Home/Home.JS",
+
+  "Login/Login.html",
+  "Login/Login.css",
+  "Login/Login.js",
+
+  "Productos/productos.html",
+  "Productos/producto.css",
+  "Productos/producto.js",
+
+  "Acerca/acerca.html",
+  "Acerca/acerca.css",
+  "Acerca/acerca.js"
 ];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS))
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open(CACHE).then((c) => c.addAll(PRECACHE_URLS))
   );
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : null)))
+      Promise.all(keys.map((k) => (k !== CACHE ? caches.delete(k) : null)))
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
-  const req = event.request;
-  if (req.method !== "GET") return;
+// Navegación: offline-first a index
+self.addEventListener("fetch", (e) => {
+  const req = e.request;
 
-  // Navegación (HTML): Network first con fallback a cache
+  // Para peticiones de página (navigate) servimos index offline si hace falta
   if (req.mode === "navigate") {
-    event.respondWith(
-      fetch(req).catch(() => caches.match("/index.html"))
+    e.respondWith(
+      fetch(req).catch(() => caches.match("index.html"))
     );
     return;
   }
 
-  // Estáticos: Cache first
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      return (
-        cached ||
-        fetch(req).then((res) => {
-          const resClone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-          return res;
-        })
-      );
-    })
+  // Resto: cache first, fallback a red
+  e.respondWith(
+    caches.match(req).then((r) => r || fetch(req))
   );
 });
