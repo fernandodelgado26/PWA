@@ -1,0 +1,89 @@
+/* ====== Base + Header (igual que el resto) ====== */
+:root{
+  --bg:#0e0e10; --bg2:#17171a; --text:#eaeaec; --muted:#b8b8be;
+  --brand:#ffffff; --btn:#ffffff; --btnText:#0e0e10; --stroke:#2a2a2f;
+  --panel:#151821; --panelBorder:#222535; --card:#0f1115;
+  --accent:#0ea5e9;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--text);
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 80% 20%, #1d1d22 0%, transparent 60%),
+    radial-gradient(800px 600px at 10% 80%, #141418 0%, transparent 60%),
+    var(--bg);
+}
+.container{width:min(1200px, 90%); margin:0 auto}
+
+/* Header */
+.site-header{position:sticky; top:0; z-index:20; background:linear-gradient(#0e0e1080,#0e0e1000); backdrop-filter:saturate(120%) blur(6px); border-bottom:1px solid transparent}
+.site-header.scrolled{border-bottom-color:var(--stroke)}
+.nav{display:grid; align-items:center; grid-template-columns:auto 1fr auto; gap:1rem; padding:14px 0}
+.brand{display:flex; gap:.6rem; align-items:center; text-decoration:none}
+.brand-mark{display:grid; place-items:center; width:28px; height:28px; border:1px solid var(--brand); border-radius:6px; font-weight:700; color:var(--brand)}
+.brand-text{letter-spacing:2px; font-weight:700; color:var(--brand); font-size:.9rem}
+
+.nav-menu ul{display:flex; gap:1.4rem; list-style:none; margin:0; padding:0}
+.nav-menu a, .link-like{color:var(--text); text-decoration:none; font-weight:600; font-size:.95rem; background:none; border:none; cursor:pointer}
+.nav-menu a.active{color:#fff; border-bottom:2px solid #fff; padding-bottom:2px}
+.nav-menu a:hover, .link-like:hover{color:#fff}
+.has-dropdown{position:relative}
+.has-dropdown .dropdown{position:absolute; top:140%; left:0; background:var(--bg2); border:1px solid var(--stroke); border-radius:10px; padding:.6rem; display:none; min-width:180px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.has-dropdown.open .dropdown{display:block}
+.dropdown a{display:block; padding:.5rem .7rem; border-radius:8px; color:var(--muted)}
+.dropdown a:hover{background:#1f1f24; color:#fff}
+
+.nav-cta{display:flex; gap:.8rem; align-items:center}
+.nav-cta .link{color:var(--muted); text-decoration:none}
+.btn{display:inline-block; padding:.8rem 1.1rem; border-radius:12px; font-weight:700; text-decoration:none; border:1px solid transparent}
+.btn-light{background:var(--btn); color:var(--btnText)}
+
+.nav-toggle{display:none; background:none; border:none; cursor:pointer}
+.nav-toggle .bar{display:block; width:22px; height:2px; background:#fff; margin:5px 0}
+
+@media (max-width:860px){
+  .nav{grid-template-columns:auto auto auto}
+  .nav-menu{display:none} .nav-cta{display:none} .nav-toggle{display:block; justify-self:end}
+  .site-header.open .nav-menu, .site-header.open .nav-cta{display:block}
+  .nav-menu{grid-column:1/-1; padding:12px 0}
+  .nav-menu ul{flex-direction:column; gap:.8rem}
+  .nav-cta{grid-column:1/-1; padding-bottom:10px}
+}
+
+/* ====== Acerca de ====== */
+.about{padding:48px 0}
+.about-hero{
+  text-align:center; margin-bottom:28px;
+}
+.about-hero h1{font-size: clamp(28px, 5vw, 44px); margin:0 0 6px}
+.about-hero h1 span{color:var(--brand)}
+.about-hero p{color:var(--muted); margin:0}
+
+.about-grid{
+  display:grid; grid-template-columns: repeat(12, 1fr); gap:18px;
+}
+.card{
+  background:var(--card); border:1px solid var(--panelBorder); border-radius:14px;
+  padding:18px; box-shadow:0 8px 26px rgba(0,0,0,.25);
+}
+.card h2{margin:0 0 10px}
+.card p{color:#cfd4dd}
+
+.card:nth-child(1){grid-column: span 6}
+.card:nth-child(2){grid-column: span 6}
+.card:nth-child(3){grid-column: span 6}
+.card-map{grid-column: span 6}
+
+.contact{list-style:none; padding:0; margin:0}
+.contact li{margin:6px 0}
+.contact a{color:#9ad1ff; text-decoration:none}
+.contact a:hover{text-decoration:underline}
+
+.map{width:100%; height:320px; border-radius:12px; border:1px solid var(--panelBorder); margin-top:10px}
+.map-note{color:#9aa3af; font-size:.95rem; margin:.6rem 0 0}
+
+@media (max-width:980px){
+  .card, .card-map{grid-column: span 12}
+}

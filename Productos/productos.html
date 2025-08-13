@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoffeandBlue</title>
+  <link rel="stylesheet" href="producto.css" />
+
+  <!-- PayPal SDK (Sandbox) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AU226-ySaCk2thBAteMJkqgOk0T_CVcmtWq5TXKiW2kE0V7jg1X-MctHZZmexGrSxARvIzDlGFEGCj0J&currency=MXN"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">ER</span>
+        <span class="brand-text">EdRe</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="sr-only">Abrir menú</span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Principal">
+        <ul>
+          <li><a class="active" href="./Productos.html">Productos</a></li>
+          <li><a href="../Acerca/Acerca.html">Acerca de</a></li>
+        </ul>
+         
+      </nav>
+
+      <div class="nav-cta">
+        <a class="link" href=""></a>
+        <a class="btn btn-light" href="../Home/Home.html">Inicio</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido -->
+  <main class="container products">
+    <section class="products-hero">
+      <h1>Nuestros cafés</h1>
+      <p class="muted">Elige tu favorito y recíbelo fresco. Pago seguro con PayPal.</p>
+    </section>
+
+    <!-- Grid de productos -->
+    <section id="grid" class="grid">
+      <!-- Producto 1 -->
+      <div class="product-card">
+        <img src="img/cafe_espresso.jpg" alt="Café Espresso" />
+        <h3>Café Espresso</h3>
+        <p>Intenso y aromático, ideal para comenzar el día con energía.</p>
+        <span class="price">$60.00 MXN</span>
+        <button class="btn-buy" data-name="Café Espresso" data-price="60" data-desc="Intenso y aromático" data-img="img/cafe_espresso.jpg">Comprar</button>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-card">
+        <img src="img/cafe_capuchino.jpg" alt="Capuchino" />
+        <h3>Capuchino</h3>
+        <p>Cremoso, con leche espumada y un toque de canela.</p>
+        <span class="price">$70.00 MXN</span>
+        <button class="btn-buy" data-name="Capuchino" data-price="70" data-desc="Cremoso y delicioso" data-img="img/cafe_capuchino.jpg">Comprar</button>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card">
+        <img src="img/cafe_latte.jpg" alt="Latte" />
+        <h3>Latte</h3>
+        <p>Suave mezcla de espresso y leche vaporizada.</p>
+        <span class="price">$65.00 MXN</span>
+        <button class="btn-buy" data-name="Latte" data-price="65" data-desc="Suave y equilibrado" data-img="img/cafe_latte.jpg">Comprar</button>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="product-card">
+        <img src="img/cafe_mocha.jpg" alt="Mocha" />
+        <h3>Mocha</h3>
+        <p>Combinación perfecta de café, leche y chocolate.</p>
+        <span class="price">$75.00 MXN</span>
+        <button class="btn-buy" data-name="Mocha" data-price="75" data-desc="Café con chocolate" data-img="img/cafe_mocha.jpg">Comprar</button>
+      </div>
+    </section>
+
+    <!-- Panel de compra -->
+    <aside id="checkout" class="checkout hidden" aria-live="polite">
+      <div class="checkout-header">
+        <h2 id="chkTitle">Tu selección</h2>
+        <button id="closeCheckout" class="close" aria-label="Cerrar">×</button>
+      </div>
+
+      <div class="checkout-body">
+        <div class="sel">
+          <img id="chkImg" alt="" />
+          <div>
+            <h3 id="chkName">—</h3>
+            <p id="chkDesc" class="muted">—</p>
+            <div class="price">
+              <span id="chkPrice">$0.00 MXN</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="paypal-buttons" class="paypal"></div>
+        <p id="payMsg" class="paymsg" aria-live="polite"></p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="producto.js"></script>
+</body>
+</html>

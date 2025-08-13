@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoffeandBlue</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="Acerca.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">ER</span>
+        <span class="brand-text">EdRe</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="sr-only">Abrir menú</span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Principal">
+        <ul>
+          <li><a href="../Home/Home.html">Inicio</a></li>
+          <li><a href="../Productos/Productos.html">Productos</a></li>
+          <li class="has-dropdown">
+            <button class="link-like" aria-haspopup="true" aria-expanded="false">Recetas ▾</button>
+            <ul class="dropdown" role="menu">
+              <li><a href="#" role="menuitem">Blog</a></li>
+              <li><a href="#" role="menuitem">Guías</a></li>
+              <li><a href="#" role="menuitem">Consejos</a></li>
+            </ul>
+          </li>
+          <li><a class="active" href="./Acerca.html">Acerca de</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="link" href=""></a>
+        <a class="btn btn-light" href="../Home/Home.html">Inicio</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Acerca de -->
+  <main class="container about">
+    <section class="about-hero">
+      <h1>Acerca de <span>Café Aroma</span></h1>
+      <p>Queremos que cada sorbo sea un momento especial, lleno de aroma, sabor y calidad.</p>
+    </section>
+
+    <section class="about-grid">
+      <article class="card">
+        <h2>Misión</h2>
+        <p>
+          Ofrecer café de la más alta calidad, cultivado de forma sostenible, para brindar a nuestros clientes una experiencia única en cada taza.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Visión</h2>
+        <p>
+          Ser reconocidos como la cafetería de referencia para los amantes del café, destacando por nuestro sabor, innovación y compromiso con los productores locales.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Contacto</h2>
+        <ul class="contact">
+          <li><strong>Teléfono:</strong> <a href="tel:+5215555555555">+52 1 55 5555 5555</a></li>
+          <li><strong>Correo:</strong> <a href="mailto:hola@cafearoma.mx">EdRe@coffeandblue.mx</a></li>
+          <li><strong>Dirección:</strong> Calle del Aroma 123, MX</li>
+          <li><strong>Horario:</strong> L–D 7:00–21:00</li>
+        </ul>
+      </article>
+
+      <article class="card card-map">
+        <h2>Estamos aquí</h2>
+        <div id="map" class="map" aria-label="Mapa con ubicación" style="height:400px;"></div>
+        <p class="map-note" id="mapNote">Mostrando tu ubicación en tiempo real.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Script de Google Maps con tu API key -->
+  <script>
+    let map;
+    let marker;
+    let followUser = true; // cambia a false si no quieres que el mapa siga tu ubicación
+
+    function initMap() {
+      // Inicializa el mapa
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: { lat: 0, lng: 0 },
+        mapTypeId: "roadmap"
+      });
+
+      // Intenta seguir tu ubicación en tiempo real
+      if ("geolocation" in navigator) {
+        navigator.geolocation.watchPosition(
+          pos => {
+            const { latitude, longitude } = pos.coords;
+            const latLng = new google.maps.LatLng(latitude, longitude);
+
+            if (!marker) {
+              marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: "Estás aquí"
+              });
+            } else {
+              marker.setPosition(latLng);
+            }
+
+            if (followUser) {
+              map.setCenter(latLng);
+            }
+
+            document.getElementById("mapNote").textContent =
+              "Seguimiento en tiempo real activo.";
+          },
+          err => {
+            console.error("Error geolocalización:", err.message);
+            document.getElementById("mapNote").textContent =
+              "No se pudo obtener tu ubicación.";
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+      } else {
+        document.getElementById("mapNote").textContent =
+          "Tu navegador no soporta geolocalización.";
+      }
+    }
+  </script>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9T093qUAX2Ih7dURB3krlpw98i4Ufe0M&callback=initMap">
+  </script>
+</body>
+</html>

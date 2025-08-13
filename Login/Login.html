@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EdRe · Login / Registro</title>
+  <link rel="stylesheet" href="Login.css" />
+</head>
+<body>
+
+  <!-- Header (mismo estilo previo) -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">ER</span>
+        <span class="brand-text">EdRe</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Contenido: Login / Registro -->
+  <main class="auth-wrapper">
+    <!-- Panel de registro -->
+    <section class="panel panel-left" id="panelRegister">
+      <h2>Registrarse</h2>
+
+      <form id="registerForm" novalidate>
+        <label>
+          <span>Nombre</span>
+          <input type="text" name="name" placeholder="Tu nombre" required />
+        </label>
+
+        <label>
+          <span>Correo</span>
+          <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required />
+        </label>
+
+        <label>
+          <span>Contraseña</span>
+          <input type="password" name="password" placeholder="••••••••" minlength="6" required />
+        </label>
+
+        <label>
+          <span>Confirmar contraseña</span>
+          <input type="password" name="confirm" placeholder="••••••••" minlength="6" required />
+        </label>
+
+        <button type="submit" class="btn btn-primary">REGISTRARSE</button>
+        <p class="form-msg" id="registerMsg" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <button class="switch-btn" id="switchBtn" aria-label="Cambiar de panel">›</button>
+
+    <!-- Panel de inicio de sesión simplificado -->
+    <section class="panel panel-right" id="panelLogin" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Iniciar Sesión</h2>
+
+      <form id="loginForm" novalidate>
+        <label>
+          <span>Correo</span>
+          <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required />
+        </label>
+        <label>
+          <span>Contraseña</span>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </label>
+        <button type="submit" class="btn btn-light">Entrar</button>
+        <p class="form-msg" id="loginMsg" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="Login.js"></script>
+</body>
+</html>

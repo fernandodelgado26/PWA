@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoffeandBlue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Home.css" />
+  <link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0f172a">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">ER</span>
+        <span class="brand-text">EdRe</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="sr-only">Abrir menú</span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Principal">
+        <ul>
+          <li><a href="../Productos/productos.html">Productos</a></li>
+          <li><a href="../Acerca/acerca.html">Acerca de</a></li>
+          <li class="has-dropdown">
+            <button class="link-like" aria-haspopup="true" aria-expanded="false">Opciones ▾</button>
+            <ul class="dropdown" role="menu">
+              <li><a href="../Login/Login.html" role="menuitem">Iniciar Sesion</a></li>
+              <li><a href="#" role="menuitem">Contactanos</a></li>
+              <li><a href="#" role="menuitem">Ubicaciones</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="link" href="../Login/Login.html">Cerrar Sesión</a>
+        <a class="btn btn-light" href="../Login/Login.html">Iniciar sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          Coffee <em>and</em> Blue
+        </h1>
+        <p class="hero-sub">
+            ¿Quieres disfrutar de un nuevo sabor de café y vivir una experiencia única?
+        </p>
+        <p class="hero-sub">
+            No necesitas tarjeta de crédito ni hacer pagos elevados.
+        </p>
+        <p class="hero-sub">
+            La calidad es lo que nos define.
+        </p>
+      </div>
+
+      <!-- “Tablet” con el clima -->
+      <div class="hero-art">
+        <div class="device">
+          <div class="device-screen">
+            <article class="card">
+              <header class="card-head">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <h3>Clima con tiempo real</h3>
+                <nav class="mini-nav">
+                  <a href="#" id="refreshWeather">Refrescar</a>
+                </nav>
+              </header>
+
+              <!-- WEATHER WIDGET -->
+              <div class="card-media weather" id="weatherBox">
+                <div class="weather-top">
+                  <div class="weather-icon" id="weatherIcon" aria-hidden="true"></div>
+                  <div class="weather-temp">
+                    <span id="weatherTemp">--</span><small>°C</small>
+                  </div>
+                </div>
+                <div class="weather-meta">
+                  <span id="weatherCity">Ubicación</span> ·
+                  <span id="weatherDesc">Cargando…</span>
+                </div>
+              </div>
+
+            </article>
+          </div>
+        </div>
+
+        <!-- Props decorativos -->
+        <div class="props">
+          <span class="prop cyl"></span>
+          <span class="prop ring"></span>
+          <span class="prop dumbbell"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .then(reg => console.log("SW registrado:", reg.scope))
+        .catch(err => console.error("Fallo SW:", err));
+    });
+  }
+</script>
+
+  <script src="Home.JS"></script>
+</body>
+</html>
